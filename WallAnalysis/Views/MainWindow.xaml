@@ -1,0 +1,118 @@
+﻿<Window x:Class="WallAnalysis.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WallAnalysis.Views"
+        mc:Ignorable="d"
+        Title="Анализ геометрии стены" 
+        Height="450" Width="800">
+
+    <Window.Resources>
+        <local:StatusToColorConverter x:Key="StatusToColorConverter"/>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="Background" Value="WhiteSmoke"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock Grid.Row="0" Text="Анализ геометрии стены" 
+                   FontSize="16" FontWeight="Bold" 
+                   HorizontalAlignment="Center" Margin="0,0,0,10"/>
+
+        <!-- Кнопка выбора -->
+        <Button Grid.Row="1" Content="Выбрать стену" 
+                Command="{Binding SelectWallCommand}"
+                Height="30" FontSize="14"
+                HorizontalAlignment="Stretch"/>
+
+        <!-- Информация о стене -->
+        <Border Grid.Row="2" BorderBrush="LightGray" 
+                BorderThickness="1" Margin="0,10" 
+                Padding="10" CornerRadius="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Имя стены -->
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Имя стены:"/>
+                <TextBox Grid.Row="0" Grid.Column="1" 
+                         Text="{Binding WallData.WallName, FallbackValue='[WallName]'}"/>
+
+                <!-- Тип стены -->
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Тип:"/>
+                <TextBox Grid.Row="1" Grid.Column="1" 
+                         Text="{Binding WallData.WallType, FallbackValue='[WallType]'}"/>
+
+                <!-- Длина -->
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Длина:"/>
+                <TextBox Grid.Row="2" Grid.Column="1" 
+                         Text="{Binding WallData.Length, StringFormat='{}{0:F0} мм', FallbackValue='[Length] мм'}"/>
+
+                <!-- Высота -->
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Высота:"/>
+                <TextBox Grid.Row="3" Grid.Column="1" 
+                         Text="{Binding WallData.Height, StringFormat='{}{0:F0} мм', FallbackValue='[Height] мм'}"/>
+
+                <!-- Толщина -->
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Толщина:"/>
+                <TextBox Grid.Row="4" Grid.Column="1" 
+                         Text="{Binding WallData.Thickness, StringFormat='{}{0:F0} мм', FallbackValue='[Thickness] мм'}"/>
+
+                <!-- Объем -->
+                <TextBlock Grid.Row="5" Grid.Column="0" Text="Объём:"/>
+                <TextBox Grid.Row="5" Grid.Column="1" 
+                         Text="{Binding WallData.Volume, StringFormat='{}{0:F3} м³', FallbackValue='[Volume] м³'}"/>
+
+                <!-- Площадь -->
+                <TextBlock Grid.Row="6" Grid.Column="0" Text="Площадь:"/>
+                <TextBox Grid.Row="6" Grid.Column="1" 
+                         Text="{Binding WallData.Area, StringFormat='{}{0:F2} м²', FallbackValue='[Area] м²'}"/>
+
+                <!-- Статус -->
+                <Border Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" 
+                        Margin="0,10,0,0" Padding="5" CornerRadius="3"
+                        Background="{Binding ValidationResult.Status, 
+                                   Converter={StaticResource StatusToColorConverter}}">
+                    <TextBlock Text="{Binding ValidationResult.Message, 
+                                    FallbackValue='Предел толщины: [ThicknessLimit]'}"
+                               HorizontalAlignment="Center" FontWeight="Bold"/>
+                </Border>
+            </Grid>
+        </Border>
+
+        <!-- Кнопка закрытия -->
+        <Button Grid.Row="3" Content="Закрыть" 
+                Command="{Binding CloseCommand}"
+                Width="100" Height="30"
+                HorizontalAlignment="Center"/>
+    </Grid>
+</Window>

@@ -1,0 +1,105 @@
+﻿<Window x:Class="WallOpening.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WallOpening.Views"
+        xmlns:ViewModel = "clr-namespace:WallOpening.ViewModels"
+        d:DataContext="{d:DesignInstance ViewModel:MainWindowViewModel}"
+        mc:Ignorable="d"        
+        Title="Контроль зазора" Height="300" Width="400">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            Grid.Row="0"
+            FontSize="16"
+            Margin="0,0,0,16"
+            Text="{Binding StatusMessage}"/>
+
+        <Border 
+            Grid.Row="1"
+            CornerRadius="8"
+            Padding="16">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Background" Value="#EFF2F7"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding OpeningInfo.IsCorrect}" Value="True">
+                            <Setter Property="Background" Value="#DFF4E0"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding OpeningInfo.IsCorrect}" Value="True">
+                            <Setter Property="Background" Value="#F9DDDD"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" 
+                           Text="Проём:"
+                           Margin="0, 0, 8, 8"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" 
+                           Text="{Binding OpeningInfo.Name}"
+                           FontWeight="SemiBold"
+                           Margin="0, 0, 0, 8"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" 
+                           Text="Расстояние, мм:"
+                           Margin="0, 0, 8, 8"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" 
+                           Text="{Binding OpeningInfo.Distance}"
+                           Margin="0, 0, 0, 8"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" 
+                           Text="Порог, мм:"
+                           Margin="0, 0, 8, 8"/>
+                <TextBox Grid.Row="2" Grid.Column="1" 
+                           Text="{Binding Limit}"
+                           Margin="0, 0, 0, 8"
+                           Width="150"
+                           HorizontalAlignment="Left"/>
+                <TextBlock Grid.Row="3" Grid.Column="0" 
+                           Text="Статус:"
+                           Margin="0, 0, 8, 8"/>
+                <TextBlock Grid.Row="3" Grid.Column="1">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Margin" Value="0, 0, 8, 0"/>
+                            <Setter Property="Text" Value="-"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding OpeningInfo.IsCorrect}" Value="True">
+                                    <Setter Property="Text" Value="Соответствует"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding OpeningInfo.IsCorrect}" Value="True">
+                                    <Setter Property="Text" Value="Превышает"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
+        </Border>
+
+        <Button
+            Grid.Row="2"
+            Content="Выбрать проём"
+            Margin="0,16,0,0"
+            Width="100"
+            HorizontalAlignment="Right"
+            Command="{Binding CalcOpening}"/>
+    </Grid>
+</Window>
