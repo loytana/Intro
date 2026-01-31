@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WallAnalysis", "WallAnalysi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateSection", "CreateSection\CreateSection.csproj", "{A3A4B3B2-0889-419B-85AB-E645198B3945}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyPlacement", "FamilyPlacement\FamilyPlacement.csproj", "{3AC195EF-35F5-44B5-8706-E0251AC0DE29}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{A3A4B3B2-0889-419B-85AB-E645198B3945}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3A4B3B2-0889-419B-85AB-E645198B3945}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3A4B3B2-0889-419B-85AB-E645198B3945}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AC195EF-35F5-44B5-8706-E0251AC0DE29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AC195EF-35F5-44B5-8706-E0251AC0DE29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AC195EF-35F5-44B5-8706-E0251AC0DE29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AC195EF-35F5-44B5-8706-E0251AC0DE29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
